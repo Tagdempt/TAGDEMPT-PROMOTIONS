@@ -1,0 +1,113 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+}
+
+model Project {
+  id               String         @id @default(cuid())
+  title            String
+  slug             String         @unique
+  description      String
+  location         String
+  status           String
+  price            String?
+  area             String?
+  createdAt        DateTime       @default(now())
+  city             String
+  state            String
+  type             String
+  units            Int?
+  updatedAt        DateTime       @updatedAt
+  brochureUrl      String?
+  category         String?
+  deliveryDate     DateTime?
+  featured         Boolean        @default(false)
+  mapUrl           String?
+  shortDescription String?
+  videoUrl         String?
+  sortOrder        Int            @default(0)
+  images           ProjectImage[]
+}
+
+model ProjectImage {
+  id        String  @id @default(cuid())
+  url       String
+  projectId String
+  isCover   Boolean @default(false)
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model News {
+  id        String   @id @default(cuid())
+  title     String
+  content   String
+  image     String?
+  createdAt DateTime @default(now())
+  published Boolean  @default(false)
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  company   String?
+  message   String
+  createdAt DateTime @default(now())
+}
+
+model Investor {
+  id         String   @id @default(cuid())
+  name       String
+  email      String
+  phone      String?
+  company    String?
+  createdAt  DateTime @default(now())
+  investment String?
+  message    String?
+  status     String   @default("NEW")
+}
+
+model Partner {
+  id        String   @id @default(cuid())
+  name      String
+  logo      String?
+  website   String?
+  createdAt DateTime @default(now())
+}
+
+model Setting {
+  id          String  @id @default(cuid())
+  companyName String
+  phone       String
+  email       String
+  address     String
+  facebook    String?
+  instagram   String?
+  linkedin    String?
+}
+
+model PlayingWithNeon {
+  id    Int    @id @default(autoincrement())
+  name  String
+  value Float? @db.Real
+
+  @@map("playing_with_neon")
+}
+
+model SiteVisit {
+  id        Int      @id @default(autoincrement())
+  count     Int      @default(0)
+  updatedAt DateTime @updatedAt
+}
