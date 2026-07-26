@@ -1,7 +1,10 @@
 import { prisma } from "@/lib/prisma";
+import { connection } from "next/server";
 import Image from "next/image";
 import Link from "next/link";
 import { Images, ArrowLeft } from "lucide-react";
+
+export const dynamic = "force-dynamic";
 
 export default async function ImagesPage() {
   const projects = await prisma.project.findMany({
@@ -108,7 +111,7 @@ export default async function ImagesPage() {
                   </p>
 
                   <Link
-                    href={`/admin/images/${project.id}`}
+                    href={`/admin/projects/${project.id}/images`}
                     className="mt-6 flex items-center justify-center gap-2 rounded-xl bg-[#08152B] px-5 py-3 font-bold text-white transition hover:bg-yellow-500 hover:text-[#08152B]"
                   >
 

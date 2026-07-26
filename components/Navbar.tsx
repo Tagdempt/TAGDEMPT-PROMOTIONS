@@ -71,7 +71,7 @@ export default function Navbar() {
             {/* Facebook - سيتم ربطه لاحقًا */}
 
             <a
-              href="https://www.facebook.com/TagemptPromotions"
+              href="https://www.facebook.com/share/1BUxWmi6ZK/"
               aria-label="Facebook"
               className="flex h-10 w-10 items-center justify-center rounded-full bg-[#1877F2] text-white transition hover:scale-110"
             >
