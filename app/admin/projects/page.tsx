@@ -1,10 +1,17 @@
+import { connection } from "next/server";
 import Link from "next/link";
 import Image from "next/image";
 import { prisma } from "@/lib/prisma";
-import DeleteProjectButton from "@/components/DeleteProjectButton";
+
+export const dynamic = "force-dynamic";
 
 export default async function ProjectsPage() {
+  await connection();
+
   const projects = await prisma.project.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
     include: {
       images: {
         where: {
@@ -13,202 +20,95 @@ export default async function ProjectsPage() {
         take: 1,
       },
     },
-    orderBy: {
-      createdAt: "desc",
-    },
   });
 
   return (
     <div className="space-y-8">
-
       <div className="flex items-center justify-between">
-
         <div>
-
-          <h1 className="text-4xl font-black text-[#08152B]">
+          <h1 className="text-3xl font-black text-[#08152B]">
             إدارة المشاريع
           </h1>
 
-          <p className="text-gray-500 mt-2">
-            جميع مشاريع المؤسسة
+          <p className="mt-2 text-gray-500">
+            إدارة مشاريع الشركة وإضافة وتعديل وحذف المشاريع.
           </p>
-
         </div>
 
         <Link
           href="/admin/projects/new"
-          className="rounded-xl bg-[#08152B] px-6 py-3 font-bold text-white hover:bg-yellow-500 hover:text-[#08152B]"
+          className="rounded-xl bg-[#08152B] px-6 py-3 font-bold text-white transition hover:bg-yellow-500 hover:text-[#08152B]"
         >
-          + مشروع جديد
+          + إضافة مشروع
         </Link>
-
       </div>
 
-      <div className="overflow-hidden rounded-3xl bg-white shadow-xl">
+      {projects.length === 0 ? (
+        <div className="rounded-2xl border bg-white p-12 text-center shadow-sm">
+          <h2 className="text-xl font-bold text-gray-700">
+            لا توجد مشاريع حالياً
+          </h2>
 
-        <table className="w-full">
+          <p className="mt-2 text-gray-500">
+            أضف أول مشروع لعرضه هنا.
+          </p>
+        </div>
+      ) : (
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {projects.map((project) => {
+            const coverImage = project.images[0];
 
-          <thead className="bg-slate-100">
-
-            <tr className="text-[#08152B]">
-
-              <th className="p-5">الصورة</th>
-
-              <th className="p-5 text-right">
-                المشروع
-              </th>
-
-              <th className="p-5">
-                المدينة
-              </th>
-
-              <th className="p-5">
-                النوع
-              </th>
-
-              <th className="p-5">
-                الحالة
-              </th>
-
-              <th className="p-5">
-                مميز
-              </th>
-
-              <th className="p-5">
-                الإجراءات
-              </th>
-
-            </tr>
-
-          </thead>
-
-          <tbody>
-
-            {projects.map((project) => (
-
-              <tr
+            return (
+              <div
                 key={project.id}
-                className="border-t hover:bg-slate-50"
+                className="overflow-hidden rounded-2xl border bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
               >
-
-                <td className="p-4">
-
-                  {project.images[0] ? (
-
-                    <div className="relative mx-auto h-16 w-24 overflow-hidden rounded-xl">
-
-                      <Image
-                        src={project.images[0].url}
-                        alt={project.title}
-                        fill
-                        className="object-cover"
-                        unoptimized
-                      />
-
-                    </div>
-
+                <div className="relative h-56 bg-gray-100">
+                  {coverImage ? (
+                    <Image
+                      src={coverImage.url}
+                      alt={project.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                      className="object-cover"
+                    />
                   ) : (
-
-                    <div className="text-gray-400">
-                      —
+                    <div className="flex h-full items-center justify-center text-gray-400">
+                      لا توجد صورة
                     </div>
-
                   )}
+                </div>
 
-                </td>
-
-                <td className="p-4">
-
-                  <div className="font-bold">
+                <div className="p-6">
+                  <h2 className="text-xl font-black text-[#08152B]">
                     {project.title}
-                  </div>
+                  </h2>
 
-                  {project.shortDescription && (
+                  <p className="mt-2 text-sm text-gray-500">
+                    {project.city} - {project.state}
+                  </p>
 
-                    <div className="text-sm text-gray-500 mt-1">
-
-                      {project.shortDescription}
-
-                    </div>
-
-                  )}
-
-                </td>
-
-                <td className="text-center">
-                  {project.city}
-                </td>
-
-                <td className="text-center">
-                  {project.type}
-                </td>
-
-                <td className="text-center">
-
-                  <span className="rounded-full bg-green-100 px-4 py-1 text-sm font-bold text-green-700">
-
-                    {project.status}
-
-                  </span>
-
-                </td>
-
-                <td className="text-center">
-
-                  {project.featured ? (
-
-                    <span className="rounded-full bg-yellow-400 px-3 py-1 text-sm font-bold">
-
-                      ⭐ نعم
-
-                    </span>
-
-                  ) : (
-
-                    <span className="text-gray-400">
-                      لا
-                    </span>
-
-                  )}
-
-                </td>
-
-                <td>
-
-                  <div className="flex justify-center gap-2">
-
+                  <div className="mt-5 flex gap-3">
                     <Link
                       href={`/admin/projects/${project.id}/edit`}
-                      className="rounded-lg bg-blue-600 px-3 py-2 text-sm text-white"
+                      className="flex-1 rounded-xl bg-blue-600 px-4 py-3 text-center font-bold text-white transition hover:bg-blue-700"
                     >
                       تعديل
                     </Link>
 
                     <Link
                       href={`/admin/projects/${project.id}/images`}
-                      className="rounded-lg bg-emerald-600 px-3 py-2 text-sm text-white"
+                      className="flex-1 rounded-xl bg-[#08152B] px-4 py-3 text-center font-bold text-white transition hover:bg-yellow-500 hover:text-[#08152B]"
                     >
                       الصور
                     </Link>
-
-                    <DeleteProjectButton
-                      id={project.id}
-                    />
-
                   </div>
-
-                </td>
-
-              </tr>
-
-            ))}
-
-          </tbody>
-
-        </table>
-
-      </div>
-
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }

@@ -81,7 +81,7 @@ export default function Navbar() {
             {/* Instagram - سيتم ربطه لاحقًا */}
 
             <a
-              href="#"
+              href="https://www.instagram.com/tagdemptpromotions?igsh=MTloY2tnNnJpc2FvNg=="
               aria-label="Instagram"
               className="flex h-10 w-10 items-center justify-center rounded-full bg-pink-600 text-white transition hover:scale-110"
             >

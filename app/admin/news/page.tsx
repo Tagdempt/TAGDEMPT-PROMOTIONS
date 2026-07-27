@@ -3,6 +3,8 @@ import Image from "next/image";
 import { prisma } from "@/lib/prisma";
 import { deleteNews } from "@/app/actions/news";
 
+export const dynamic = "force-dynamic";
+
 export default async function NewsPage() {
   const news = await prisma.news.findMany({
     orderBy: {
