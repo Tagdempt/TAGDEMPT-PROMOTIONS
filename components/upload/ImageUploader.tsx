@@ -9,9 +9,7 @@ type Props = {
 export default function ImageUploader({ onUpload }: Props) {
   return (
     <CldUploadWidget
-      uploadPreset={
-        process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET
-      }
+      uploadPreset="tagdempt_uploads"
       onSuccess={(result: any) => {
         const url = result?.info?.secure_url;
 
