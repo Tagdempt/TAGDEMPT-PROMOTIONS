@@ -2,6 +2,7 @@ import { connection } from "next/server";
 import Link from "next/link";
 import Image from "next/image";
 import { prisma } from "@/lib/prisma";
+import DeleteProjectButton from "@/components/admin/DeleteProjectButton";
 
 export const dynamic = "force-dynamic";
 
@@ -88,20 +89,22 @@ export default async function ProjectsPage() {
                     {project.city} - {project.state}
                   </p>
 
-                  <div className="mt-5 flex gap-3">
+                  <div className="mt-5 grid grid-cols-3 gap-2">
                     <Link
                       href={`/admin/projects/${project.id}/edit`}
-                      className="flex-1 rounded-xl bg-blue-600 px-4 py-3 text-center font-bold text-white transition hover:bg-blue-700"
+                      className="rounded-xl bg-blue-600 px-3 py-3 text-center text-sm font-bold text-white transition hover:bg-blue-700"
                     >
                       تعديل
                     </Link>
 
                     <Link
                       href={`/admin/projects/${project.id}/images`}
-                      className="flex-1 rounded-xl bg-[#08152B] px-4 py-3 text-center font-bold text-white transition hover:bg-yellow-500 hover:text-[#08152B]"
+                      className="rounded-xl bg-[#08152B] px-3 py-3 text-center text-sm font-bold text-white transition hover:bg-yellow-500 hover:text-[#08152B]"
                     >
                       الصور
                     </Link>
+
+                    <DeleteProjectButton projectId={project.id} />
                   </div>
                 </div>
               </div>

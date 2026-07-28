@@ -1,15 +1,46 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { revalidatePath } from "next/cache";
 
-export async function deleteProject(id: string) {
-  await prisma.project.delete({
-    where: {
-      id,
-    },
-  });
+export async function deleteProject(
+  projectId: string
+): Promise<{ success: boolean; error?: string }> {
+  try {
+    if (!projectId) {
+      return {
+        success: false,
+        error: "معرّف المشروع غير صالح.",
+      };
+    }
 
-  revalidatePath("/admin/projects");
-  revalidatePath("/projects");
+    const project = await prisma.project.findUnique({
+      where: {
+        id: projectId,
+      },
+    });
+
+    if (!project) {
+      return {
+        success: false,
+        error: "المشروع غير موجود.",
+      };
+    }
+
+    await prisma.project.delete({
+      where: {
+        id: projectId,
+      },
+    });
+
+    return {
+      success: true,
+    };
+  } catch (error) {
+    console.error("Delete project error:", error);
+
+    return {
+      success: false,
+      error: "حدث خطأ أثناء حذف المشروع.",
+    };
+  }
 }
