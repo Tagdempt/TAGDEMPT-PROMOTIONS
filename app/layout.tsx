@@ -25,7 +25,11 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "TAGDEMPT PROMOTIONS",
-  description: "TAGDEMPT PROMOTIONS",
+  description:
+    "TAGDEMPT PROMOTIONS - شركة متخصصة في الترقية العقارية والاستثمار والمشاريع العقارية.",
+  verification: {
+    google: "Ms-XBfHVPAp1bx5LEmtUPT2reDn18382n1ASW4DwXog",
+  },
 };
 
 export default function RootLayout({
