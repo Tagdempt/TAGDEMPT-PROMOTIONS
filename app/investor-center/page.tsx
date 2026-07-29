@@ -63,7 +63,7 @@ export default function InvestorCenter() {
           </a>
 
           <a
-            href="/governance"
+           href="/#governance"
             className="rounded-2xl bg-white p-8 shadow-lg transition hover:-translate-y-2"
           >
             <div className="mb-5 text-5xl">⚖️</div>

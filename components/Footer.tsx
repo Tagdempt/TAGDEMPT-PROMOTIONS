@@ -322,7 +322,7 @@ export default function Footer() {
             </a>
 
             <a
-              href="#"
+              href="https://www.linkedin.com/in/tagdempt-promotions-a05455425"
               aria-label="LinkedIn"
               className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-gray-300 transition hover:border-yellow-400 hover:bg-yellow-400 hover:text-[#020814]"
             >

@@ -33,7 +33,10 @@ const principles = [
 
 export default function Governance() {
   return (
-    <section className="relative overflow-hidden bg-[#08152B] py-32">
+    <section
+  id="governance"
+  className="relative overflow-hidden bg-[#08152B] py-32"
+>
 
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(212,175,55,.08),transparent_40%)]" />
 

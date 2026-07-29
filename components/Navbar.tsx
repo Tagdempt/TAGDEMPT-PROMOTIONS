@@ -91,7 +91,7 @@ export default function Navbar() {
             {/* LinkedIn - سيتم ربطه لاحقًا */}
 
             <a
-              href="#"
+              href="https://www.linkedin.com/in/tagdempt-promotions-a05455425"
               aria-label="LinkedIn"
               className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-700 text-white transition hover:scale-110"
             >
