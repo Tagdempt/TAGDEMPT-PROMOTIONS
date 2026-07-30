@@ -6,6 +6,7 @@ import {
   FaFacebookF,
   FaInstagram,
   FaLinkedinIn,
+  FaWhatsapp,
 } from "react-icons/fa";
 import VisitorCounter from "./VisitorCounter";
 
@@ -32,11 +33,11 @@ export default function Footer() {
               />
 
               <div>
-                <h2 className="text-2xl font-black text-yellow-400">
+                <h2 className="text-xl font-black text-white">
                   TAGDEMPT
                 </h2>
 
-                <p className="tracking-widest text-gray-400">
+                <p className="text-sm font-bold text-yellow-400">
                   PROMOTIONS
                 </p>
               </div>
@@ -299,7 +300,7 @@ export default function Footer() {
 
         </div>
 
-        {/* Social */}
+              {/* Social */}
 
         <div className="mt-20 flex flex-col items-center justify-between gap-8 border-t border-white/10 pt-10 md:flex-row">
 
@@ -308,6 +309,8 @@ export default function Footer() {
             <a
               href="https://www.facebook.com/share/1BUxWmi6ZK/"
               aria-label="Facebook"
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-gray-300 transition hover:border-yellow-400 hover:bg-yellow-400 hover:text-[#020814]"
             >
               <FaFacebookF size={18} />
@@ -316,6 +319,8 @@ export default function Footer() {
             <a
               href="https://www.instagram.com/tagdemptpromotions?igsh=MTloY2tnNnJpc2FvNg=="
               aria-label="Instagram"
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-gray-300 transition hover:border-yellow-400 hover:bg-yellow-400 hover:text-[#020814]"
             >
               <FaInstagram size={18} />
@@ -324,9 +329,23 @@ export default function Footer() {
             <a
               href="https://www.linkedin.com/in/tagdempt-promotions-a05455425"
               aria-label="LinkedIn"
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-gray-300 transition hover:border-yellow-400 hover:bg-yellow-400 hover:text-[#020814]"
             >
               <FaLinkedinIn size={18} />
+            </a>
+
+            {/* WhatsApp */}
+
+            <a
+              href="https://wa.me/213659100227"
+              aria-label="WhatsApp"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-gray-300 transition hover:border-green-400 hover:bg-green-500 hover:text-white"
+            >
+              <FaWhatsapp size={20} />
             </a>
 
             <VisitorCounter />
