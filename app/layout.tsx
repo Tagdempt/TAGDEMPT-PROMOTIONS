@@ -1,11 +1,6 @@
 import type { Metadata } from "next";
-import {
-  IBM_Plex_Sans_Arabic,
-  Inter,
-} from "next/font/google";
+import { IBM_Plex_Sans_Arabic, Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
-
-import "./globals.css";
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -26,7 +21,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "TAGDEMPT PROMOTIONS",
   description:
-    "TAGDEMPT PROMOTIONS - شركة متخصصة في الترقية العقارية والاستثمار والمشاريع العقارية.",
+    "TAGDEMPT PROMOTIONS - Promotion immobilière, projets et opportunités d'investissement en Algérie.",
   verification: {
     google: "Ms-XBfHVPAp1bx5LEmtUPT2reDn18382n1ASW4DwXog",
   },
@@ -44,7 +39,7 @@ export default function RootLayout({
       className={`${arabic.variable} ${inter.variable}`}
       suppressHydrationWarning
     >
-      <body className="min-h-screen bg-white text-slate-900">
+      <body>
         <Navbar />
 
         <main>{children}</main>
