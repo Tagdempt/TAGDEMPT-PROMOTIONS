@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { prisma } from "@/lib/prisma";
 import type { Prisma } from "@prisma/client";
 
@@ -10,30 +9,7 @@ import {
   ArrowLeft,
 } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "أخبار TAGDEMPT PROMOTIONS | آخر الأخبار والإعلانات",
-  description:
-    "تابع آخر أخبار وإعلانات TAGDEMPT PROMOTIONS المتعلقة بالمشاريع العقارية والاستثمارات والشراكات والفرص الجديدة في الجزائر.",
-  keywords: [
-    "TAGDEMPT PROMOTIONS",
-    "أخبار TAGDEMPT",
-    "أخبار العقارات في الجزائر",
-    "أخبار الاستثمار العقاري",
-    "مشاريع عقارية",
-    "استثمار عقاري",
-    "الترقية العقارية في الجزائر",
-  ],
-  openGraph: {
-    title: "أخبار TAGDEMPT PROMOTIONS | آخر الأخبار والإعلانات",
-    description:
-      "تابع آخر أخبار TAGDEMPT PROMOTIONS المتعلقة بالمشاريع والاستثمارات والشراكات والفرص الجديدة.",
-    url: "https://tagdempt-promotions.vercel.app/news",
-    siteName: "TAGDEMPT PROMOTIONS",
-    locale: "ar_DZ",
-    type: "website",
-  },
-};
-
+// منع Next.js من prerender الصفحة أثناء build
 export const dynamic = "force-dynamic";
 
 type NewsItem = Prisma.NewsGetPayload<{}>;

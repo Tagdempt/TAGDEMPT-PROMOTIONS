@@ -1,3 +1,4 @@
+import "./globals.css";
 import type { Metadata } from "next";
 import { IBM_Plex_Sans_Arabic, Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
