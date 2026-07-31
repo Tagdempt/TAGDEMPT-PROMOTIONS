@@ -1,11 +1,11 @@
-import "./globals.css";
+import "@/app/globals.css";
+
 import type { Metadata } from "next";
 import { IBM_Plex_Sans_Arabic, Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
 const arabic = IBM_Plex_Sans_Arabic({
   subsets: ["arabic"],
   weight: ["300", "400", "500", "600", "700"],
