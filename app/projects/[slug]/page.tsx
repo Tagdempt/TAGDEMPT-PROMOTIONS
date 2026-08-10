@@ -66,7 +66,7 @@ export default async function ProjectDetails({ params }: Props) {
     <main className="overflow-hidden bg-gradient-to-b from-[#071528] via-[#0A1C34] to-[#F7F8FA]">
       {/* ================= HERO ================= */}
 
-      <section className="relative h-[500px] overflow-hidden md:h-[600px]">
+      <section className="relative h-[420px] overflow-hidden md:h-[500px]">
         {project.images.length > 0 && (
           <Image
             src={project.images[0].url}

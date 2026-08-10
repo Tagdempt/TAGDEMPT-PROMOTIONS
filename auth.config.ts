@@ -11,7 +11,7 @@ const authConfig: NextAuthConfig = {
     authorized({ auth, request }) {
       const { pathname } = request.nextUrl;
 
-      // السماح بصفحة تسجيل الدخول
+      // صفحة تسجيل الدخول مفتوحة
       if (pathname === "/admin/login") {
         return true;
       }
@@ -21,7 +21,7 @@ const authConfig: NextAuthConfig = {
         return !!auth?.user;
       }
 
-      // السماح بباقي صفحات الموقع
+      // باقي الموقع مفتوح
       return true;
     },
   },

@@ -6,6 +6,7 @@ import { LogOut } from "lucide-react";
 export default function LogoutButton() {
   return (
     <button
+      type="button"
       onClick={() =>
         signOut({
           callbackUrl: "/admin/login",

@@ -1,27 +1,8 @@
 import type { MetadataRoute } from "next";
-import { prisma } from "@/lib/prisma";
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = "https://tagdempt-promotions.vercel.app";
+const baseUrl = "https://tagdempt-promotions.vercel.app";
 
-  const [projects, news] = await Promise.all([
-    prisma.project.findMany({
-      select: {
-        slug: true,
-        updatedAt: true,
-      },
-    }),
-    prisma.news.findMany({
-      where: {
-        published: true,
-      },
-      select: {
-        id: true,
-        createdAt: true,
-      },
-    }),
-  ]);
-
+export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
       url: baseUrl,
@@ -37,26 +18,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.9,
     },
 
-    ...projects.map((item) => ({
-      url: `${baseUrl}/projects/${item.slug}`,
-      lastModified: item.updatedAt,
-      changeFrequency: "weekly" as const,
-      priority: 0.8,
-    })),
-
     {
       url: `${baseUrl}/news`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
     },
-
-    ...news.map((item) => ({
-      url: `${baseUrl}/news/${item.id}`,
-      lastModified: item.createdAt,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    })),
 
     {
       url: `${baseUrl}/investment`,
